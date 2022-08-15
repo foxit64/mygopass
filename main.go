@@ -9,14 +9,15 @@ import (
 	"github.com/akamensky/argparse"
 )
 
-const defaultChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#$?!:=@"
+const defaultChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const specialChars = "+*$%&()[]!:=@#{}"
 
-func RandStringBytes(n int) string {
-	b := make([]byte, n)
-	for i := range b {
-		b[i] = defaultChars[rand.Intn(len(defaultChars))]
+func RandStringBytes(n int, chars string) string {
+	rsb := make([]byte, n)
+	for i := range rsb {
+		rsb[i] = chars[rand.Intn(len(chars))]
 	}
-	return string(b)
+	return string(rsb)
 }
 
 func main() {
@@ -29,6 +30,7 @@ func main() {
 	// creating arguments
 	argLength := parser.Int("l", "length", &argparse.Options{Required: false, Default: 32, Help: "Password length"})
 	argCount := parser.Int("c", "count", &argparse.Options{Required: false, Default: 4, Help: "Password count"})
+	argSpecial := parser.Flag("s", "special", &argparse.Options{Required: false, Default: false, Help: "Use special chars"})
 
 	err := parser.Parse(os.Args)
 	if err != nil {
@@ -38,7 +40,13 @@ func main() {
 
 	// loop count
 	for i := 1; i <= *argCount; i++ {
-		fmt.Println(RandStringBytes(*argLength))
+		if *argSpecial {
+			var chars = defaultChars + specialChars
+			fmt.Println(RandStringBytes(*argLength, chars))
+		} else {
+			var chars = defaultChars
+			fmt.Println(RandStringBytes(*argLength, chars))
+		}
 	}
 
 }
