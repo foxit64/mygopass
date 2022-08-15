@@ -1,0 +1,3 @@
+# mygopass
+
+Simple Password Generator
