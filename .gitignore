@@ -12,3 +12,5 @@ env
 *.swp
 *.swx
 *.vimtags
+
+dist/
