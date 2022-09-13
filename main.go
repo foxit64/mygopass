@@ -10,7 +10,7 @@ import (
 )
 
 const defaultChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-const specialChars = "+*$%&()[]!:=@#{}"
+const specialChars = "1234567890+*$%&()[]!:=@#{}"
 
 func RandStringBytes(n int, chars string) string {
 	rsb := make([]byte, n)
