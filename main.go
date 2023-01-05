@@ -4,13 +4,16 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/akamensky/argparse"
 )
 
-const defaultChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-const specialChars = "1234567890+*$%&()[]!:=@#{}"
+const lowerChars = "abcdefghijklmnopqrstuvwxyz"
+const upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const numberChars = "1234567890"
+const specialChars = "!@#$%^&*()+"
 
 func RandStringBytes(n int, chars string) string {
 	rsb := make([]byte, n)
@@ -30,7 +33,10 @@ func main() {
 	// creating arguments
 	argLength := parser.Int("l", "length", &argparse.Options{Required: false, Default: 32, Help: "Password length"})
 	argCount := parser.Int("c", "count", &argparse.Options{Required: false, Default: 4, Help: "Password count"})
+	argNumbers := parser.Flag("n", "numbers", &argparse.Options{Required: false, Default: false, Help: "Use number chars"})
 	argSpecial := parser.Flag("s", "special", &argparse.Options{Required: false, Default: false, Help: "Use special chars"})
+	argLower := parser.Flag("o", "lower", &argparse.Options{Required: false, Default: false, Help: "Use only lower chars"})
+	argUpper := parser.Flag("u", "upper", &argparse.Options{Required: false, Default: false, Help: "Use only UPPER chars"})
 
 	err := parser.Parse(os.Args)
 	if err != nil {
@@ -38,15 +44,22 @@ func main() {
 		os.Exit(1)
 	}
 
-	// loop count
+	// loop count and check args
+	var chars = lowerChars + upperChars
 	for i := 1; i <= *argCount; i++ {
 		if *argSpecial {
-			var chars = defaultChars + specialChars
-			fmt.Println(RandStringBytes(*argLength, chars))
-		} else {
-			var chars = defaultChars
-			fmt.Println(RandStringBytes(*argLength, chars))
+			chars += specialChars
 		}
+		if *argNumbers {
+			chars += numberChars
+		}
+		if *argLower {
+			chars = strings.ToLower(chars)
+		}
+		if *argUpper {
+			chars = strings.ToUpper(chars)
+		}
+		fmt.Println(RandStringBytes(*argLength, chars))
 	}
 
 }
