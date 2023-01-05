@@ -11,15 +11,9 @@ builds:
       - linux
       - openbsd
       - windows
-archives:
-  - replacements:
-      darwin: Darwin
-      freebsd: FreeBSD
-      linux: Linux
-      openbsd: OpenBSD
-      windows: Windows
-      386: i386
-      amd64: x86_64
+    goarch:
+      - amd64
+      - arm64
 checksum:
   name_template: 'checksums.txt'
 snapshot:
