@@ -1,6 +1,6 @@
 # mygopass
 
-![build](https://github.com/foxit64/mygopass/build/badge.svg)
+![build](https://github.com/foxit64/mygopass/actions/workflows/build.yml/badge.svg)
 
 Simple Password Generator
 
