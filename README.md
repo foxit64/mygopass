@@ -5,7 +5,7 @@
 Simple Password Generator
 
 ```bash
-» bin/mygopass
+» mygopass
 rNAtkvVGIucJRFifXnPnNHMxFjVvCnFB
 saNESpdoWkNBpLZEPBPxZJSPsNfpIQMg
 bDEVUTMEtvtkCrQnDxxmnpSuidSSucnU
