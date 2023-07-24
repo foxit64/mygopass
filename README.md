@@ -1,5 +1,7 @@
 # mygopass
 
+![build](https://github.com/foxit64/mygopass/build/badge.svg)
+
 Simple Password Generator
 
 ```bash
