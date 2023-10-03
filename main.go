@@ -30,7 +30,7 @@ func RandStringBytes(n int, chars string) string {
 
 func main() {
 	// random seed
-	rand.Seed(time.Now().UnixNano())
+	rand.NewSource(time.Now().UnixNano())
 
 	// create parser objects
 	parser := argparse.NewParser("my-gopass", "simple password generator written in GO")
